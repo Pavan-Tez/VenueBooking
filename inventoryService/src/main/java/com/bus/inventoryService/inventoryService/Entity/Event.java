@@ -1,5 +1,7 @@
 package com.bus.inventoryService.inventoryService.Entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,5 +37,8 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "venue_id")
     private Venue venue;
+
+    @Column(name = "ticket_price")
+    private BigDecimal ticketPrice;
     
 }

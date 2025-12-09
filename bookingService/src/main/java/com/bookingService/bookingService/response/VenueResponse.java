@@ -1,4 +1,4 @@
-package com.bus.inventoryService.inventoryService.response;
+package com.bookingService.bookingService.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VenueInventoryResponse {
-    private Long venueId;
-    private String venueName;
+@Builder
+public class VenueResponse {
+    private Long id;
+    private String name;
     private String address;
     private Long totalCapacity;
 }

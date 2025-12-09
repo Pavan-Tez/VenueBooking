@@ -11,5 +11,8 @@ public interface InventoryService {
 
     VenueInventoryResponse getVenueInformation(Long venueId);
 
+    EventInventoryResponse getEventInventoryById(final Long eventId);
+
+    void updateEventCapacity(final Long eventId, final Long ticketsBooked);
 
 }

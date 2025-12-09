@@ -14,7 +14,10 @@ import com.bus.inventoryService.inventoryService.response.EventInventoryResponse
 import com.bus.inventoryService.inventoryService.response.VenueInventoryResponse;
 import com.bus.inventoryService.inventoryService.service.InventoryService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class InventoryServiceImpl implements InventoryService {
 
     private final EventRepository eventRepository;
@@ -37,6 +40,8 @@ public class InventoryServiceImpl implements InventoryService {
                 .name(event.getName())
                 .capacity(event.getTotalCapacity())
                 .venue(event.getVenue())
+                .eventId(event.getId())
+                .ticketPrice(event.getTicketPrice())
                 .build())
                 .collect(Collectors.toList());
     
@@ -51,8 +56,31 @@ public class InventoryServiceImpl implements InventoryService {
             .venueId(venue.getId())
             .venueName(venue.getName())
             .totalCapacity(venue.getTotalCapacity())
+            .address(venue.getAddress())
             .build(); 
     
+    }
+
+    @Override
+    public EventInventoryResponse getEventInventoryById(final Long eventId) {
+        final Event event = eventRepository.findById(eventId).orElse(null);
+        
+        return EventInventoryResponse.builder()
+            .name(event.getName())
+            .capacity(event.getTotalCapacity())
+            .venue(event.getVenue())
+            .ticketPrice(event.getTicketPrice())
+            .eventId(event.getId())
+            .build();
+    }
+
+    @Override
+    public void updateEventCapacity(Long eventId, Long ticketsBooked) {
+
+        final Event event = eventRepository.findById(eventId).orElse(null);
+        event.setLeftCapacity(event.getLeftCapacity() - ticketsBooked);
+        eventRepository.saveAndFlush(event);
+        log.info("Updated event capacity for event id: {} with ticketss booked:{}",eventId,ticketsBooked);
     }
     
     
