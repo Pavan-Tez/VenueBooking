@@ -42,6 +42,7 @@ public class InventoryServiceImpl implements InventoryService {
                 .venue(event.getVenue())
                 .eventId(event.getId())
                 .ticketPrice(event.getTicketPrice())
+                .leftCapacity(event.getLeftCapacity())
                 .build())
                 .collect(Collectors.toList());
     
@@ -71,6 +72,7 @@ public class InventoryServiceImpl implements InventoryService {
             .venue(event.getVenue())
             .ticketPrice(event.getTicketPrice())
             .eventId(event.getId())
+            .leftCapacity(event.getLeftCapacity())
             .build();
     }
 
